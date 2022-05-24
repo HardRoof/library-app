@@ -126,3 +126,6 @@ input[type=text], input[type=number] {
   opacity: 1;
 }
 
+span {
+  display: block;
+}
