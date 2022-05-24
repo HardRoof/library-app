@@ -1,1 +1,128 @@
 @import url(./normalize.css);
+
+:root {
+  font-size: 62.5%; /* To turn 1rem into 10px */
+}
+
+/* Big container */
+body {
+  font-size: 1.6rem; /* To turn 1rem into 10px */
+  font-family: American Typewriter, serif, Arial;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: fit-content(10%) auto;
+}
+
+header {
+  display: flex;
+  margin: 0 2rem;
+  justify-content: space-between;
+  align-items: center;
+  grid-area: 1 / 1 / 2 / 1;
+}
+
+.top {
+  display: flex;
+  gap: 1rem;
+}
+
+.top.right {
+  gap: 2rem;
+}
+
+.left img {
+  object-fit: cover;
+}
+
+main{
+  display: grid;
+  /* grid-template-columns: clamp(20rem, 25%, 28rem) 4fr; */
+  background-color: aqua;
+}
+
+#LibContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  align-content: flex-start;   /* To set auto height rows, sizing to content  */
+  position: relative;
+}
+
+
+/* Example */
+.example {
+border: solid;
+height: fit-content;
+}
+
+.classDiv {
+  width: 200px;
+  height: 200px;
+  background-color: blueviolet;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.open-button {
+  position: fixed;
+  bottom:2rem;
+  right: 2rem;
+  padding: 1.2rem 2rem;
+  width: 20rem;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+main nav {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px; /* Negative half of height. */
+  margin-left: -150px; /* Negative half of width. */
+  border: 3px solid;
+  z-index: 2;
+  background-color: white;
+  overflow: auto
+}
+
+.formClass {
+    max-width: 30rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+}
+
+input[type=text], input[type=number] {
+  width: 100%;
+  padding: 1rem;
+  margin: 5px 0 2rem 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 5px 0 2rem 0;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns button {  
+  padding: 1em 2em;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.btns button:hover, .open-button:hover {
+  opacity: 1;
+}
+
