@@ -9,7 +9,65 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		
-		
+		<div class="container">
+			<header>
+				<div class="top left">
+					<img src="img/bookshelf.png" alt="Logo" width="80px">
+					<h1>My little library</h1>
+				</div>
+				<div class="top right">
+					<img src="img/bell.png" alt="Bell" width="22px">
+					<button>Log in</button>
+				</div>
+			</header>
+			<main>
+				<nav>
+					<form action="" method="post" id="submitForm" class="formClass">
+						<label for="title">Title</label>
+						<input type="text" id="title" required>
+
+						<label for="author">Author</label>
+						<input type="text" id="author" required>
+
+						<label for="genre">Genre</label>
+						<input type="text" id="genre" required>
+
+						<label for="published">Originally published</label>
+						<input type="text" id="published" required>
+
+						<label for="pages">Pages</label>
+						<input type="number" id="pages" required>
+
+						<div class="checkbox">
+							<label for="readIt">Have you read it?</label>
+							<input type="checkbox" id="readIt" name="readIt" value="yes">	
+						</div>
+						<div class="btns">
+							<button class="formButton" type="submit" form="submitForm">Add Book</button>
+							<button type="button" class="cancelButton">Close</button>		
+						</div>
+					</form>
+				</nav>
+				<section id="LibContainer">
+					<div class="example">
+						Animal Farm <br>George Orwell <br> Genre: Political satire
+						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
+					</div>
+					<div class="example">
+						Animal Farm <br>George Orwell <br> Genre: Political satire
+						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
+					</div>
+					<div class="example">
+						Animal Farm <br>George Orwell <br> Genre: Political satire
+						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
+					</div>
+					<div class="example">
+						Animal Farm <br>George Orwell <br> Genre: Political satire
+						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
+					</div>
+				</section>
+				<button class="open-button">Open Form</button>
+			</main>
+		</div>
 	</body>
 </html>
