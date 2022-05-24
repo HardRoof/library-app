@@ -1,23 +1,20 @@
 const LibContainer = document.querySelector("#LibContainer")
 
-let myLibrary = [];
-
 //Creating divs w/ a class inside #container
 function createCard() {
   newDiv = document.createElement('div');
   LibContainer.appendChild(newDiv)
-  newDiv.classList.add("classDiv")
-  classDiv = document.querySelector(".classDiv");
-  for (let j = 0; j < 5; j++) {
+  newDiv.classList.add('classDiv')
+  classDiv = document.querySelectorAll('.classDiv');
+  for (let j = 0; j < 6; j++) {
     newSpan = document.createElement('SPAN')
     newDiv.appendChild(newSpan)
-    newSpan.classList.add(`classSpan${j+1}`)
-    classSpan = document.querySelectorAll(".newSpan")
+    newSpan.classList.add('classSpan')
   }
+  classSpan = document.querySelectorAll(".classSpan")
 };
-createCard()
-createCard()
-createCard()
+
+
 
 // Constructor function
 function Book(title, author, genre, originallyPublished, numberOfPages) {
@@ -41,15 +38,13 @@ const published = document.querySelector("#published")
 const pages = document.querySelector("#pages")
 const readIt = document.querySelector("#readIt")
 
-// Imports submit button
-const submitButton = document.querySelector(".formButton")
+// Imports form
+const form = document.querySelector(".formClass")
 
 // Collects user book info, creating a new object
-submitButton.addEventListener("click", bookInfo)
+form.addEventListener("submit", bookInfo)
 function bookInfo(e) {
-  if ((`${title.value}` != '') && (`${author.value}` != '') && (`${genre.value}` != '') && (`${published.value}` != '') && (`${pages.value}` != '')) {
-    e.preventDefault(); //If all required inputs are filled we prevent submission of the form
-  }
+  e.preventDefault(); //To prevent submission of the form
   userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.value}`)
   clear()
 }
@@ -65,11 +60,31 @@ function clear() {
   nav.style.display = "none"
 }
 
+// Creates an empty array
+let myLibrary = [];
+
 // Saves user book in my myLibrary
-submitButton.addEventListener("click", addBookToLibrary)
+form.addEventListener("submit", addBookToLibrary)
 function addBookToLibrary() {
   myLibrary.push(userBook)
 }
+
+// Imports spans(Node-list)
+classSpan = document.querySelectorAll(".classSpan")
+
+// To display user book
+// form.addEventListener("submit", displayUserBooks)
+// function displayUserBooks() {
+//   createCard()
+//   for (let j = 0; j < classSpan.length; j++) {
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].title)) 
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].author))
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].genre)) 
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].published)) 
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].pages)) 
+//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].readIt)) 
+//   }
+// }
 
 
 
@@ -87,6 +102,6 @@ function openForm() {
 }
 
 cancelButton.addEventListener("click", () => {
-  nav.style.display = "none"
+  clear()
 })
 ///////////////////
