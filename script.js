@@ -73,20 +73,16 @@ function addBookToLibrary() {
 classSpan = document.querySelectorAll(".classSpan")
 
 // To display user book
-// form.addEventListener("submit", displayUserBooks)
-// function displayUserBooks() {
-//   createCard()
-//   for (let j = 0; j < classSpan.length; j++) {
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].title)) 
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].author))
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].genre)) 
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].published)) 
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].pages)) 
-//     classSpan[j].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].readIt)) 
-//   }
-// }
-
-
+form.addEventListener("submit", displayUserBooks)
+function displayUserBooks() {
+  createCard()
+  classSpan[0+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].title)) 
+  classSpan[1+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].author))
+  classSpan[2+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Genre: ${myLibrary[myLibrary.length - 1].genre}`)) 
+  classSpan[3+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Published: ${myLibrary[myLibrary.length - 1].published}`)) 
+  classSpan[4+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Number of Pages: ${myLibrary[myLibrary.length - 1].pages}`)) 
+  classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].readIt)) 
+}
 
 /////////////////////
 // Open/close form
