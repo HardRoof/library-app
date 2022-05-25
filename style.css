@@ -1,13 +1,27 @@
 @import url(./normalize.css);
 
+@font-face {
+  font-family: oldNewspaper;
+  src: url(font/OldNewspaperTypes.ttf);
+}
+
 :root {
   font-size: 62.5%; /* To turn 1rem into 10px */
+  --pink-bg-color: rgb(228 171 152);
+  --pink-main-bg-color: rgb(247, 207, 192);
+  --black-font-color: #000000c4;
+  --shadow: 1px 2px 4px rgba(0, 0, 0, 0.51);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Big container */
 body {
   font-size: 1.6rem; /* To turn 1rem into 10px */
   font-family: American Typewriter, serif, Arial;
+  color: var(--black-font-color);
 }
 
 .container {
@@ -18,10 +32,14 @@ body {
 
 header {
   display: flex;
-  margin: 0 2rem;
+  padding: 0 2rem;
   justify-content: space-between;
   align-items: center;
   grid-area: 1 / 1 / 2 / 1;
+  background-color: var(--pink-bg-color);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
 }
 
 .top {
@@ -29,43 +47,45 @@ header {
   gap: 1rem;
 }
 
+h1 {
+  font-size: 3.5rem;
+  text-decoration: underline;
+}
+
 .top.right {
   gap: 2rem;
 }
 
 .left img {
-  object-fit: cover;
+  display: flex;
+  align-self: center;
 }
 
+button {
+  background-color: var(--pink-bg-color);
+  border-color: var(--pink-bg-color);
+}
+
+.right button {
+  border: solid 1px;
+}
+
+header, .right button, .open-button{
+  color: white;
+} 
+
+/* Main */
 main{
-  display: grid;
-  /* grid-template-columns: clamp(20rem, 25%, 28rem) 4fr; */
-  background-color: aqua;
+  padding: 2rem;
+  background-color: var(--pink-main-bg-color);
 }
 
 #LibContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr));
   gap: 2rem;
   align-content: flex-start;   /* To set auto height rows, sizing to content  */
   position: relative;
-}
-
-
-/* Example */
-.example {
-border: solid;
-height: fit-content;
-}
-
-.classDiv {
-  width: 200px;
-  height: 200px;
-  background-color: blueviolet;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .open-button {
@@ -75,9 +95,39 @@ height: fit-content;
   padding: 1.2rem 2rem;
   width: 20rem;
   cursor: pointer;
-  opacity: 0.8;
 }
 
+/* Cards(books) */
+.example {
+  border: solid;
+  background-image: url(imgs/kiwihug-bin-YwxUJ4s-unsplash.jpeg);
+  font-family: oldNewspaper, American Typewriter, serif;
+  padding: 1rem 1rem 0 1rem;
+  margin-bottom: 6px;
+  font-size: 1.8rem;
+  border: 2px outset;
+  border-radius: 8px;
+}
+
+.classDiv {
+  background-image: url(imgs/kiwihug-bin-YwxUJ4s-unsplash.jpeg);
+  padding: 1rem 1rem 0 1rem;
+  border: 2px outset;
+  border-radius: 8px;
+}
+
+span {
+  display: block;
+  font-family: oldNewspaper, American Typewriter, serif;
+  margin-bottom: 8px;
+  font-size: 1.9rem;
+  letter-spacing: 0.2px;
+  text-transform: capitalize;
+}
+
+
+
+/* Form part */
 main nav {
   display: none;
   position: fixed;
@@ -88,7 +138,7 @@ main nav {
   border: 3px solid;
   z-index: 2;
   background-color: white;
-  overflow: auto
+  overflow: auto;
 }
 
 .formClass {
@@ -122,10 +172,14 @@ input[type=text], input[type=number] {
   opacity: 0.8;
 }
 
-.btns button:hover, .open-button:hover {
+.open-button:hover, .btns button:hover {
+  background-color: rgb(238, 175, 151);
+  border-color: rgb(238, 175, 151);
+}
+
+.btns button:hover {
   opacity: 1;
 }
 
-span {
-  display: block;
-}
+
+
