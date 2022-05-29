@@ -3,27 +3,57 @@ const LibContainer = document.querySelector("#LibContainer")
 //Creating divs w/ a class inside #container
 function createCard() {
   newDiv = document.createElement('div');
-  LibContainer.appendChild(newDiv)
-  newDiv.classList.add('classDiv')
-  classDiv = document.querySelectorAll('.classDiv');
+  LibContainer.appendChild(newDiv);
+  newDiv.classList.add('classDiv');
+  classDiv = document.getElementsByClassName('classDiv');
   for (let j = 0; j < 6; j++) {
     newSpan = document.createElement('SPAN')
     newDiv.appendChild(newSpan)
     newSpan.classList.add('classSpan')
   }
-  classSpan = document.querySelectorAll(".classSpan")
+  classSpan = document.querySelectorAll(".classSpan");
+
+  //Creates delete book btn / Adds event listener to it
+  deleteBook = document.createElement("button");
+  newDiv.appendChild(deleteBook);
+  deleteBook.id = `${classDiv.length - 1}`;
+  deleteBook.name = "erase";
+  deleteBook.classList.add('deleteBookClass') ;
+  deleteBookClass = document.getElementsByName('erase'); //NodeList and live
+
+  deleteBookClass.forEach((btn, index) => {
+    if (deleteBook.id == index) { //To only add one event at a time
+      btn.addEventListener('click', function eliminate(e) {
+        myLibrary.splice(e.currentTarget.id, 1)
+        deleteBookClass[e.currentTarget.id].remove()
+        classDiv[e.currentTarget.id].remove()
+        reassignIDs()
+      })
+    }
+  })
+
+  //Creates an image element dynamically(trash bin)
+  let btnImg = new Image(24,24);
+  btnImg.src = './imgs/trash-can-outline.png';
+  deleteBook.appendChild(btnImg)
 };
 
-
+// After elimination of btn, it reassign ids for remaining buttons
+function reassignIDs() {
+  console.log(deleteBookClass)
+  for (let i = 0; i < deleteBookClass.length; i++) {
+    deleteBookClass[i].id = i
+  }
+}
 
 // Constructor function
-function Book(title, author, genre, originallyPublished, numberOfPages) {
+function Book(title, author, genre, originallyPublished, numberOfPages, readIt) {
   this.title = title
   this.author = author
   this.genre = genre
   this.published = originallyPublished
   this.pages = numberOfPages
-  this.readIt = true
+  this.readIt = readIt
 }
 
 // Creates a JS object
@@ -45,7 +75,7 @@ const form = document.querySelector(".formClass")
 form.addEventListener("submit", bookInfo)
 function bookInfo(e) {
   e.preventDefault(); //To prevent submission of the form
-  userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.value}`)
+  userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.checked}`)
   clear()
 }
 
@@ -56,7 +86,7 @@ function clear() {
   genre.value = ''
   published.value = ''
   pages.value = ''
-  readIt.value = ''
+  // readIt.value = ''
   nav.style.display = "none"
 }
 
@@ -88,7 +118,7 @@ function displayUserBooks() {
 // Open/close form
 nav = document.querySelector("main nav")
 openButton = document.querySelector(".open-button")
-cancelButton = document.querySelector(".cancelButton") 
+closeButton = document.querySelector(".closeButton") 
 
 formClass = document.querySelector(".formClass")
 
@@ -97,7 +127,8 @@ function openForm() {
   nav.style.display = "block"
 }
 
-cancelButton.addEventListener("click", () => {
+closeButton.addEventListener("click", () => {
   clear()
 })
 ///////////////////
+
