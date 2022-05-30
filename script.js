@@ -41,7 +41,7 @@ function clear() {
   genre.value = ''
   published.value = ''
   pages.value = ''
-  readIt.checked = 'true'
+  readIt.checked = 'false'
   nav.style.display = "none"
 }
 
@@ -58,10 +58,10 @@ function displayUserBooks() {
   classSpan[3+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Published: ${myLibrary[myLibrary.length - 1].published}`)) 
   classSpan[4+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Number of Pages: ${myLibrary[myLibrary.length - 1].pages}`)) 
   if ((myLibrary[myLibrary.length - 1].readIt) == "true"){
-    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("I have read it")) 
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("Read: ✔")) 
   }
   if ((myLibrary[myLibrary.length - 1].readIt) == "false"){
-    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("I haven't read it")) 
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("Read: ✖")) 
   }
 }
 
@@ -83,6 +83,7 @@ function createCard() {
 
   //Creates delete book btn / Adds event listener to it
   deleteBook = document.createElement("button");
+  deleteBook.textContent = "Delete"
   newDiv.appendChild(deleteBook);
   deleteBook.id = `${classDiv.length - 1}`; // id based in amount of cards
   deleteBook.name = "erase";
@@ -101,13 +102,13 @@ function createCard() {
   });
 
   //Creates an image element (trash bin)
-  const btnImg = new Image(24,24);
+  const btnImg = new Image(20, 20);
   btnImg.src = './imgs/trash-can-outline.png';
   deleteBook.appendChild(btnImg);
 
   //Creates toggle btn(read?) / Adds event listener to it
   toggleBtn = document.createElement("button");
-  toggleBtn.textContent = "↻"
+  toggleBtn.textContent = "Status ✎"
   newDiv.appendChild(toggleBtn);
   toggleBtn.id = `${classDiv.length - 1}`;
   toggleBtn.name = "switch";
@@ -118,11 +119,11 @@ function createCard() {
     const spanIndex = (5+((classDiv.length - 1) * 6))
     if (toggleBtn.id == index) { // important: To only add one event in the newly created button
       btn.addEventListener('click', (e) => { //Toggle function(display and library info)
-        if (classSpan[spanIndex].textContent == "I have read it") {
-          classSpan[spanIndex].textContent = "I haven't read it";
+        if (classSpan[spanIndex].textContent == "Read: ✔") {
+          classSpan[spanIndex].textContent = "Read: ✖";
           myLibrary[e.currentTarget.id].readIt = "false"
         } else {
-          classSpan[spanIndex].textContent = "I have read it";
+          classSpan[spanIndex].textContent = "Read: ✔";
           myLibrary[e.currentTarget.id].readIt = "true"
         }
       })
@@ -153,5 +154,4 @@ function openForm() {
 closeButton.addEventListener("click", () => {
   clear()
 })
-
 
