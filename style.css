@@ -86,7 +86,7 @@ header, .right button, .open-button{
 
 /* Main */
 main{
-  padding: 2rem;
+  padding: 6rem;
   background-color: var(--pink-main-bg-color);
 }
 
@@ -175,8 +175,10 @@ input[type=text], input[type=number] {
   bottom: 2%;
   right: 2%;
   padding: 0;
-  width: 4rem;
-  height: 4rem;
+  width: 6vmin;
+  height: 6vmin;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
   font-size: 2.6rem;
   cursor: pointer;
   border-radius: 50%;
