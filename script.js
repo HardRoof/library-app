@@ -18,20 +18,16 @@ const readIt = document.querySelector("#readIt")
 
 // Imports form/Creates an empty array
 const form = document.querySelector(".formClass")
-let myLibrary = []; 
+let myLibrary = JSON.parse(localStorage.getItem("myLibrary")) || [];
 
 // Collects user book info, creating a new object
 form.addEventListener("submit", bookInfo)
 function bookInfo(e) {
   e.preventDefault(); //To prevent submission of the form
   userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.checked}`)
-  addBookToLibrary()
+  myLibrary.push(userBook) // Saves user's new book in my myLibrary
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   clear()
-}
-
-// Saves user's new book in my myLibrary
-function addBookToLibrary() {
-  myLibrary.push(userBook)
 }
 
 // It clears all inputs and hides form
@@ -94,6 +90,7 @@ function createCard() {
     if (deleteBook.id == index) { // important: To only add one event in the newly created button
       btn.addEventListener('click', function eliminate(e) {
         myLibrary.splice(e.currentTarget.id, 1) //Deletes of library
+        localStorage.setItem("myLibrary", JSON.stringify(myLibrary)) //Delete of LS
         deleteBookClass[e.currentTarget.id].remove() //Deletes button of DOM
         classDiv[e.currentTarget.id].remove() //Deletes card of DOM
         reassignIDs()
@@ -122,9 +119,11 @@ function createCard() {
         if (classSpan[spanIndex].textContent == "Read: ✔") {
           classSpan[spanIndex].textContent = "Read: ✖";
           myLibrary[e.currentTarget.id].readIt = "false"
+          localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
         } else {
           classSpan[spanIndex].textContent = "Read: ✔";
           myLibrary[e.currentTarget.id].readIt = "true"
+          localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
         }
       })
     }
@@ -133,7 +132,6 @@ function createCard() {
 
 // After elimination of a delete button, it reassigns IDs for remaining buttons
 function reassignIDs() {
-  console.log(deleteBookClass)
   for (let i = 0; i < deleteBookClass.length; i++) {
     deleteBookClass[i].id = i
   }
@@ -155,3 +153,28 @@ closeButton.addEventListener("click", () => {
   clear()
 })
 
+//Fires event during page load  
+window.addEventListener("load", loadSaved)
+function loadSaved() {
+  if (myLibrary.length != 0) { 
+    for (let i = 0; i < myLibrary.length; i++) {
+      createLibrary(i)
+    }
+  }
+}
+
+//Creates and displays localStorage library
+function createLibrary(i) {
+  createCard()
+  classSpan[0+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[i].title)) 
+  classSpan[1+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[i].author))
+  classSpan[2+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Genre: ${myLibrary[i].genre}`)) 
+  classSpan[3+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Published: ${myLibrary[i].published}`)) 
+  classSpan[4+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Number of Pages: ${myLibrary[i].pages}`)) 
+  if ((myLibrary[i].readIt) == "true"){
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("Read: ✔")) 
+  }
+  if ((myLibrary[i].readIt) == "false"){
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("Read: ✖")) 
+  }
+}
