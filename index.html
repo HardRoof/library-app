@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>My little library</title>
-		<link rel="shortcut icon" type="image/jpg" href="imgs/bookshelf-pink.png">
+		<link rel="shortcut icon" type="image/jpg" href="imgs/pinkBook.svg">
 		<script src="script.js" defer></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
@@ -13,16 +13,17 @@
 		<div class="container">
 			<header>
 				<div class="top left">
-					<img src="imgs/bookshelf.png" alt="Logo" width="70px">
+					<img src="imgs/whiteBook.svg" alt="Logo" width="60px">
 					<h1>My little library</h1>
 				</div>
 				<div class="top right">
 					<img src="imgs/bell.png" alt="Bell" width="22px">
-					<button>Log in</button>
+					<button><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Log out</a></button>
 				</div>
 			</header>
 			<main>
 				<nav>
+					<button class="closeButton">&#x2715</button>
 					<form action="" method="post" id="submitForm" class="formClass">
 						<label for="title">Title</label>
 						<input type="text" id="title" required>
@@ -45,29 +46,13 @@
 						</div>
 						<div class="btns">
 							<button class="formButton" type="submit" form="submitForm">Add Book</button>
-							<button type="button" class="cancelButton">Close</button>		
+							<button type="reset" class="resetButton">Clear</button>		
 						</div>
 					</form>
 				</nav>
 				<section id="LibContainer">
-					<div class="example">
-						Animal Farm <br>George Orwell <br> Genre: Political satire
-						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
-					</div>
-					<div class="example">
-						Animal Farm <br>George Orwell <br> Genre: Political satire
-						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
-					</div>
-					<div class="example">
-						Animal Farm <br>George Orwell <br> Genre: Political satire
-						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
-					</div>
-					<div class="example">
-						Animal Farm <br>George Orwell <br> Genre: Political satire
-						<br> Published: 1945 <br> Number of Pages: 112 <br>  ✓ 
-					</div>
 				</section>
-				<button class="open-button">Open Form</button>
+				<button class="open-button">+</button>
 			</main>
 		</div>
 	</body>
