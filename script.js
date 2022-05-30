@@ -1,6 +1,74 @@
+// Constructor function
+function Book(title, author, genre, originallyPublished, numberOfPages, readIt) {
+  this.title = title
+  this.author = author
+  this.genre = genre
+  this.published = originallyPublished
+  this.pages = numberOfPages
+  this.readIt = readIt
+}
+
+// Imports inputs
+const title = document.querySelector("#title")
+const author = document.querySelector("#author")
+const genre = document.querySelector("#genre")
+const published = document.querySelector("#published")
+const pages = document.querySelector("#pages")
+const readIt = document.querySelector("#readIt")
+
+// Imports form/Creates an empty array
+const form = document.querySelector(".formClass")
+let myLibrary = []; 
+
+// Collects user book info, creating a new object
+form.addEventListener("submit", bookInfo)
+function bookInfo(e) {
+  e.preventDefault(); //To prevent submission of the form
+  userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.checked}`)
+  addBookToLibrary()
+  clear()
+}
+
+// Saves user's new book in my myLibrary
+function addBookToLibrary() {
+  myLibrary.push(userBook)
+}
+
+// It clears all inputs and hides form
+function clear() {
+  title.value = ''
+  author.value = ''
+  genre.value = ''
+  published.value = ''
+  pages.value = ''
+  readIt.checked = 'true'
+  nav.style.display = "none"
+}
+
+// Imports "spans"
+classSpan = document.querySelectorAll(".classSpan")
+
+// To display user's book
+form.addEventListener("submit", displayUserBooks)
+function displayUserBooks() {
+  createCard()
+  classSpan[0+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].title)) 
+  classSpan[1+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].author))
+  classSpan[2+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Genre: ${myLibrary[myLibrary.length - 1].genre}`)) 
+  classSpan[3+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Published: ${myLibrary[myLibrary.length - 1].published}`)) 
+  classSpan[4+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Number of Pages: ${myLibrary[myLibrary.length - 1].pages}`)) 
+  if ((myLibrary[myLibrary.length - 1].readIt) == "true"){
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("I have read it")) 
+  }
+  if ((myLibrary[myLibrary.length - 1].readIt) == "false"){
+    classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode("I haven't read it")) 
+  }
+}
+
+// Imports "LibContainer"
 const LibContainer = document.querySelector("#LibContainer")
 
-//Creating divs w/ a class inside #container
+//Creates a div(card) with 6 spans and 2 buttons
 function createCard() {
   newDiv = document.createElement('div');
   LibContainer.appendChild(newDiv);
@@ -16,29 +84,53 @@ function createCard() {
   //Creates delete book btn / Adds event listener to it
   deleteBook = document.createElement("button");
   newDiv.appendChild(deleteBook);
-  deleteBook.id = `${classDiv.length - 1}`;
+  deleteBook.id = `${classDiv.length - 1}`; // id based in amount of cards
   deleteBook.name = "erase";
-  deleteBook.classList.add('deleteBookClass') ;
-  deleteBookClass = document.getElementsByName('erase'); //NodeList and live
+  deleteBook.classList.add('deleteBookClass');
+  deleteBookClass = document.getElementsByName('erase'); //PS: NodeList and live
 
   deleteBookClass.forEach((btn, index) => {
-    if (deleteBook.id == index) { //To only add one event at a time
+    if (deleteBook.id == index) { // important: To only add one event in the newly created button
       btn.addEventListener('click', function eliminate(e) {
-        myLibrary.splice(e.currentTarget.id, 1)
-        deleteBookClass[e.currentTarget.id].remove()
-        classDiv[e.currentTarget.id].remove()
+        myLibrary.splice(e.currentTarget.id, 1) //Deletes of library
+        deleteBookClass[e.currentTarget.id].remove() //Deletes button of DOM
+        classDiv[e.currentTarget.id].remove() //Deletes card of DOM
         reassignIDs()
       })
     }
-  })
+  });
 
-  //Creates an image element dynamically(trash bin)
-  let btnImg = new Image(24,24);
+  //Creates an image element (trash bin)
+  const btnImg = new Image(24,24);
   btnImg.src = './imgs/trash-can-outline.png';
-  deleteBook.appendChild(btnImg)
+  deleteBook.appendChild(btnImg);
+
+  //Creates toggle btn(read?) / Adds event listener to it
+  toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "↻"
+  newDiv.appendChild(toggleBtn);
+  toggleBtn.id = `${classDiv.length - 1}`;
+  toggleBtn.name = "switch";
+  toggleBtn.classList.add('toggleBtnClass');
+  toggleBtnClass = document.getElementsByName('switch'); //NodeList and live
+
+  toggleBtnClass.forEach((btn, index) => {
+    const spanIndex = (5+((classDiv.length - 1) * 6))
+    if (toggleBtn.id == index) { // important: To only add one event in the newly created button
+      btn.addEventListener('click', (e) => { //Toggle function(display and library info)
+        if (classSpan[spanIndex].textContent == "I have read it") {
+          classSpan[spanIndex].textContent = "I haven't read it";
+          myLibrary[e.currentTarget.id].readIt = "false"
+        } else {
+          classSpan[spanIndex].textContent = "I have read it";
+          myLibrary[e.currentTarget.id].readIt = "true"
+        }
+      })
+    }
+  })
 };
 
-// After elimination of btn, it reassign ids for remaining buttons
+// After elimination of a delete button, it reassigns IDs for remaining buttons
 function reassignIDs() {
   console.log(deleteBookClass)
   for (let i = 0; i < deleteBookClass.length; i++) {
@@ -46,76 +138,7 @@ function reassignIDs() {
   }
 }
 
-// Constructor function
-function Book(title, author, genre, originallyPublished, numberOfPages, readIt) {
-  this.title = title
-  this.author = author
-  this.genre = genre
-  this.published = originallyPublished
-  this.pages = numberOfPages
-  this.readIt = readIt
-}
-
-// Creates a JS object
-const bookExample1 = new Book("Lord of the flies", "William Golding", "Allegorical novel", "September 17, 1954",  224)
-const bookExample2 = new Book("aaa", "William Golding", "Aaa", "1954",  224)
-
-// Imports inputs
-const title = document.querySelector("#title")
-const author = document.querySelector("#author")
-const genre = document.querySelector("#genre")
-const published = document.querySelector("#published")
-const pages = document.querySelector("#pages")
-const readIt = document.querySelector("#readIt")
-
-// Imports form
-const form = document.querySelector(".formClass")
-
-// Collects user book info, creating a new object
-form.addEventListener("submit", bookInfo)
-function bookInfo(e) {
-  e.preventDefault(); //To prevent submission of the form
-  userBook = new Book(`${title.value}`, `${author.value}`, `${genre.value}`, `${published.value}`, `${pages.value}`, `${readIt.checked}`)
-  clear()
-}
-
-// It clears all inputs and hides it
-function clear() {
-  title.value = ''
-  author.value = ''
-  genre.value = ''
-  published.value = ''
-  pages.value = ''
-  // readIt.value = ''
-  nav.style.display = "none"
-}
-
-// Creates an empty array
-let myLibrary = [];
-
-// Saves user book in my myLibrary
-form.addEventListener("submit", addBookToLibrary)
-function addBookToLibrary() {
-  myLibrary.push(userBook)
-}
-
-// Imports spans(Node-list)
-classSpan = document.querySelectorAll(".classSpan")
-
-// To display user book
-form.addEventListener("submit", displayUserBooks)
-function displayUserBooks() {
-  createCard()
-  classSpan[0+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].title)) 
-  classSpan[1+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].author))
-  classSpan[2+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Genre: ${myLibrary[myLibrary.length - 1].genre}`)) 
-  classSpan[3+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Published: ${myLibrary[myLibrary.length - 1].published}`)) 
-  classSpan[4+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(`Number of Pages: ${myLibrary[myLibrary.length - 1].pages}`)) 
-  classSpan[5+((classDiv.length - 1) * 6)].appendChild(document.createTextNode(myLibrary[myLibrary.length - 1].readIt)) 
-}
-
-/////////////////////
-// Open/close form
+// Show/hide form
 nav = document.querySelector("main nav")
 openButton = document.querySelector(".open-button")
 closeButton = document.querySelector(".closeButton") 
@@ -130,5 +153,5 @@ function openForm() {
 closeButton.addEventListener("click", () => {
   clear()
 })
-///////////////////
+
 
