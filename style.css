@@ -40,23 +40,18 @@ header {
   box-shadow: var(--shadow);
   position: relative;
   z-index: 2;
-  min-width: 55rem;
 }
 
 .top {
   display: flex;
-  gap: 1.2rem;
+  gap: 1vw;
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: clamp(1.6rem, 6vmin, 4rem);
   text-decoration: underline;
   cursor: default;
   user-select: none
-}
-
-.top.right {
-  gap: 2rem;
 }
 
 a {
@@ -66,6 +61,7 @@ a {
 
 
 .left img {
+  width: min(10vmin,60px);
   transition: 0s 0.3s;
   cursor: pointer;
 }
