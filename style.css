@@ -125,7 +125,7 @@ span {
 }
 
 span:nth-child(6n) {
-  margin-bottom: 1.5rem;
+  margin-bottom: 5.5rem;
 }
 
 /* Form */
@@ -134,7 +134,7 @@ main nav {
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-top: -250px; /* Negative half of height. */
+  margin-top: -250px; /* About half of height. */
   margin-left: -150px; /* Negative half of width. */
   border: 3px solid;
   z-index: 2;
@@ -225,12 +225,13 @@ input[type=text], input[type=number] {
   border-radius: 1rem;
   color: white;
   cursor: pointer;
-  position: relative;
+  position: absolute;
   width: 45%;
   max-width: 16rem;
   font-size: 1.7rem;
   margin-bottom: 8px;
   padding: 4px 6px;
+  bottom: 0px;
 }
 
 /* PseudoClasses effects */
@@ -272,4 +273,3 @@ transition: 0s;
   color: rgb(223 131 100);
   box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
 }
-
