@@ -1,11 +1,13 @@
-// Constructor function
-function Book(title, author, genre, originallyPublished, numberOfPages, readIt) {
-  this.title = title
-  this.author = author
-  this.genre = genre
-  this.published = originallyPublished
-  this.pages = numberOfPages
-  this.readIt = readIt
+// USing class instead of plain constructors.
+class Book {
+  constructor(title, author, genre, originallyPublished, numberOfPages, readIt) {
+    this.title = title
+    this.author = author
+    this.genre = genre
+    this.published = originallyPublished
+    this.pages = numberOfPages
+    this.readIt = readIt
+  }
 }
 
 // Imports inputs
