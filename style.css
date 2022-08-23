@@ -51,7 +51,7 @@ h1 {
   font-size: clamp(1.6rem, 6vmin, 4rem);
   text-decoration: underline;
   cursor: default;
-  user-select: none
+  user-select: none;
 }
 
 a {
@@ -59,9 +59,8 @@ a {
   text-decoration: none;
 }
 
-
 .left img {
-  width: min(10vmin,60px);
+  width: min(10vmin, 60px);
   transition: 0s 0.3s;
   cursor: pointer;
 }
@@ -76,12 +75,14 @@ button {
   cursor: pointer;
 }
 
-header, .right button, .open-button{
+header,
+.right button,
+.open-button {
   color: white;
-} 
+}
 
 /* Main */
-main{
+main {
   padding: 6rem;
   background-color: var(--pink-main-bg-color);
 }
@@ -90,7 +91,7 @@ main{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   gap: 2rem;
-  align-content: flex-start;   /* To set auto height rows, sizing to content  */
+  align-content: flex-start; /* To set auto height rows, sizing to content  */
   position: relative;
 }
 
@@ -148,7 +149,8 @@ main nav {
   padding: 3rem 1rem 1rem 1rem;
 }
 
-input[type=text], input[type=number] {
+input[type="text"],
+input[type="number"] {
   width: 100%;
   padding: 1rem;
   margin: 5px 0 2rem 0;
@@ -181,7 +183,7 @@ input[type=text], input[type=number] {
   transition: 0.1s ease;
 }
 
-.closeButton{
+.closeButton {
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -196,7 +198,7 @@ input[type=text], input[type=number] {
   justify-content: space-between;
 }
 
-.btns button {  
+.btns button {
   padding: 1em 2em;
   cursor: pointer;
   opacity: 0.9;
@@ -235,12 +237,15 @@ input[type=text], input[type=number] {
 }
 
 /* PseudoClasses effects */
-.top img:active, .right button:active {
-transform: scale(1.2);
-transition: 0s;
+.top img:active,
+.right button:active {
+  transform: scale(1.2);
+  transition: 0s;
 }
 
-.open-button:hover, .btns button:hover, .closeButton:hover {
+.open-button:hover,
+.btns button:hover,
+.closeButton:hover {
   background-color: rgb(238, 175, 151);
   border-color: rgb(238, 175, 151);
 }
@@ -268,7 +273,7 @@ transition: 0s;
 
 .toggleBtnClass:hover {
   background: none;
-  border-color: #FAA4A4;
+  border-color: #faa4a4;
   transform: scale(1.05);
   color: rgb(223 131 100);
   box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
