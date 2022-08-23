@@ -1,4 +1,4 @@
-// USing class instead of plain constructors.
+// Using class instead of plain constructors.
 class Book {
   constructor(title, author, genre, originallyPublished, numberOfPages, readIt) {
     this.title = title
